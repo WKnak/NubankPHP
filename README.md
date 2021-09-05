@@ -12,11 +12,11 @@ Biblioteca não oficial para acesso a dados de sua conta NuBank.
 Projeto inicial em desenvolvimento.
 
 ## TODO
-[ ] Colocar access-token em cache por algumas horas (minimizar reautenticação). Atualmente um access-token
+- [ ] Colocar access-token em cache por algumas horas (minimizar reautenticação). Atualmente um access-token
 é obtido para cada refresh de página, talvez não seja necessário.
-[ ] Criação de solicitação de pagamento PIX
-[ ] Acompanhamento de pagamento de solicitação
-[ ] Cache dos detalhes das transações (para evitar consultas repetidas)
+- [ ] Criação de solicitação de pagamento PIX
+- [ ] Acompanhamento de pagamento de solicitação
+- [ ] Cache dos detalhes das transações (para evitar consultas repetidas)
 
 ## Licença
 Copyright 2021 William Knak - https://github.com/WKnak/NubankPHP
