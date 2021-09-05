@@ -1,0 +1,59 @@
+{
+    viewer {        
+        savingsAccount {
+            id
+            feed {
+                id
+                __typename
+                title
+                detail
+                postDate
+                ... on TransferInEvent {
+                    amount                    
+                    sourceType
+                    sourceDescription                    
+                    originAccount {
+                        id
+                        personIdentifier
+                        name
+                        bank {
+                          name
+                          number
+                        }
+                    }
+                }
+                ... on TransferOutEvent {
+                    amount
+                    destinationName                 
+                    destinationAccount {
+                        id
+                        personIdentifier
+                        name
+                        bank {
+                          name
+                          number
+                        }
+                    }
+                }
+                ... on TransferOutReversalEvent {
+                    amount
+                }
+                ... on BillPaymentEvent {
+                    amount
+                }
+                ... on DebitPurchaseEvent {
+                    amount
+                }
+                ... on BarcodePaymentEvent {
+                    amount
+                }
+                ... on DebitWithdrawalFeeEvent {
+                    amount
+                }
+                ... on DebitWithdrawalEvent {
+                    amount
+                }    
+            }
+        }
+    }
+}

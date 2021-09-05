@@ -1,0 +1,22 @@
+query BarcodePaymentReceipt_Query(
+  $barcodePaymentId: ID!
+) {
+  viewer {
+    name
+    cpf
+    savingsAccount {
+      id
+      bankAccount {
+        number
+        checkDigit
+        branch
+        id
+      }
+      barcodePaymentEvent {        
+        id
+      }
+    }
+    features
+    id
+  }
+}

@@ -1,0 +1,8 @@
+{ 
+  viewer {
+    id
+    name
+    cpf
+    email    
+  }
+}

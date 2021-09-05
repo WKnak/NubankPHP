@@ -1,0 +1,39 @@
+query TransferInDetails_Query(  $transferInId: ID!) 
+{
+  viewer {
+    name
+    cpf    
+    savingsAccount {
+      id
+      bankAccount {
+        number
+        checkDigit
+        branch
+        bank {
+          name
+        }
+        id
+      }   
+      transferInEvent(transferInId: $transferInId) {
+        postDate
+        amount
+        sourceType
+        sourceDescription
+        originAccount {
+          id
+          branch
+          number
+          digit
+          personIdentifier
+          name
+          bank {
+            name
+            number
+          }  
+        }
+        id
+      }
+    }
+    id
+  }
+}

@@ -1,0 +1,46 @@
+query InternalTransfer_Query {
+  viewer {
+    ...InternalTransfer_viewer
+    id
+  }
+}
+
+fragment InternalTransfer_viewer on Customer {
+  features
+  savingsAccount {
+    id
+    redeemableBalance {
+      netAmount
+      id
+    }
+    balanceAllocation {
+      available
+      id
+    }
+    externalBankAccounts {
+      id
+      bank {
+        number
+        name
+      }
+      branch
+      number
+      digit
+      name
+      personIdentifier
+    }
+    bankAccount {
+      bank {
+        name
+        number
+      }
+      branch
+      number
+      checkDigit
+      id
+    }
+  }
+  cpf
+  cnpj
+  name
+}

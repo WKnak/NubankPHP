@@ -1,0 +1,32 @@
+query ScheduledBarcodePaymentRequestReceipt_Query(
+  $barcodePaymentId: ID!
+) {
+  viewer {
+    name
+    cpf
+    savingsAccount {
+      id
+      bankAccount {
+        number
+        checkDigit
+        branch
+        id
+      }
+      scheduledBarcodePaymentRequestEvent(barcodePaymentId: $barcodePaymentId) {
+        createdAt
+        amountRequested
+        postDate
+        barcodeInfo {
+          isUtilities
+          beneficiaryName
+          barcode
+          bankName
+          dueDay
+        }
+        id
+      }
+    }
+    features
+    id
+  }
+}

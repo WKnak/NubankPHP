@@ -1,0 +1,10 @@
+query pickTransferInWithContainer_PickTransferIn_Query {
+  viewer {
+    features
+    savingsAccount {
+      pixDepositEnabled
+      id
+    }
+    id
+  }
+}

@@ -1,0 +1,11 @@
+{
+    allBanks {
+        defaultTransferType
+        supportsPix
+        isNubank
+        ispb
+        name
+        number
+        pixNotAvailableReason
+    }
+}

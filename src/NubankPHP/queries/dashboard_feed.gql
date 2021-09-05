@@ -1,0 +1,523 @@
+{
+  viewer {
+    features
+    savingsAccount {
+      feed {
+        __typename
+        postDate
+        title
+        detail
+        ... on TransferInEvent {
+          originAccount {
+            name
+            id
+          }
+        }
+        ...baseCell_event
+        id
+      }
+      id
+    }
+    id
+  }
+}
+
+fragment baseCell_event on FeedEvent {
+  __typename
+  id
+  postDate
+  title
+  detail
+  ...genericCell_feedEvent
+  ...instructionsCell_instructionsEvent
+  ...debitFeatureActivationCell_debitFeatureActivationEvent
+  ...welcomeCell_welcomeEvent
+  ...transferInCell_transferInEvent
+  ...transferOutCell_transferOutEvent
+  ...transferOutReversalCell_transferOutReversalEvent
+  ...scheduledTransferOutCell_scheduledTransferOutEvent
+  ...canceledScheduledTransferOutCell_canceledScheduledTransferOutEvent
+  ...barcodePaymentCell_barcodePaymentEvent
+  ...billPaymentCell_billPaymentEvent
+  ...lendingTransferOutCell_lendingTransferOutEvent
+  ...lendingTransferInCell_lendingTransferInEvent
+  ...lendingRenegotiationDownPaymentCell_lendingRenegotiationDownPaymentEvent
+  ...barcodePaymentFailureCell_barcodePaymentFailureEvent
+  ...barcodePaymentRequestFailedCell_barcodePaymentRequestFailedEvent
+  ...canceledScheduledBarcodePaymentRequestCell_canceledScheduledBarcodePaymentRequestEvent
+  ...scheduledBarcodePaymentRequestCell_scheduledBarcodePaymentRequestEvent
+  ...scheduledBarcodePaymentRequestFailedCell_scheduledBarcodePaymentRequestFailedEvent
+  ...debitPurchaseCell_debitPurchaseEvent
+  ...debitPurchaseReversalCell_debitPurchaseReversalEvent
+  ...debitWithdrawalCell_debitWithdrawalEvent
+  ...debitWithdrawalReversalCell_debitWithdrawalReversalEvent
+  ...debitWithdrawalFeeCell_debitWithdrawalFeeEvent
+  ...debitWithdrawalFeeReversalCell_debitWithdrawalFeeReversalEvent
+  ...addToReserveCell_addToReserveEvent
+  ...removeFromReserveCell_removeFromReserveEvent
+  ...automaticSavingsReserveCell_automaticSavingsReserveEvent
+  ...moneysendPaymentCell_paymentEvent
+  ...moneysendFundingCell_fundingEvent
+  ...moneysendFundingReversalCell_fundingReversalEvent
+  ...phoneRechargePendingCell_phoneRechargePendingEvent
+  ...phoneRechargeSuccessCell_phoneRechargeSuccessEvent
+  ...phoneRechargeFailureCell_phoneRechargeFailureEvent
+  ...scheduledBillPaymentCell_scheduledBillPaymentEvent
+  ...phoneRechargeMoneyReturnedCell_phoneRechargeMoneyReturnedEvent
+  ...chargingBoletoPaymentCell_chargingBoletoPaymentEvent
+  ...chargebackCell_chargebackEvent
+  ...chargebackReversalCell_chargebackReversalEvent
+  ...chargebackFeeCell_chargebackFeeEvent
+  ...chargebackFeeReversalCell_chargebackFeeReversalEvent
+  ...lockMoneySuccessCell_lockMoneySuccessEvent
+  ...lockMoneyFailureCell_lockMoneyFailureEvent
+  ...lockMoneyPendingCell_lockMoneyPendingEvent
+  ...rewardsCashbackCell_rewardsCashbackEvent
+  ...genericCellV2_feedEvent
+}
+
+fragment genericCell_feedEvent on FeedEvent {
+  postDate
+  title
+  detail
+}
+
+fragment instructionsCell_instructionsEvent on OnboardingEvent {
+  postDate
+  title
+  detail
+}
+
+fragment debitFeatureActivationCell_debitFeatureActivationEvent on DebitFeatureActivationEvent {
+  postDate
+  title
+  detail
+  icon
+}
+
+fragment welcomeCell_welcomeEvent on WelcomeEvent {
+  postDate
+  title
+  detail
+}
+
+fragment transferInCell_transferInEvent on TransferInEvent {
+  postDate
+  title
+  amount  
+  originAccount {
+    name
+    bank {
+      number
+    }
+    id
+  }
+}
+
+fragment transferOutCell_transferOutEvent on TransferOutEvent {
+  title
+  postDate
+  amountRequested
+  amount
+  destinationName
+  failed
+  succeededAt
+  scheduledAt
+  destinationAccount {
+    name
+    bank {
+      name
+      number
+    }
+    id
+  }
+}
+
+fragment transferOutReversalCell_transferOutReversalEvent on TransferOutReversalEvent {
+  postDate
+  amount
+  title
+  destinationAccount {
+    name
+    bank {
+      number
+    }
+    id
+  }
+}
+
+fragment scheduledTransferOutCell_scheduledTransferOutEvent on ScheduledTransferOutEvent {
+  title
+  detail
+  postDate
+  amountRequested
+  createdAtTime
+  destinationAccount {
+    name
+    bank {
+      name
+      number
+    }
+    id
+  }
+}
+
+fragment canceledScheduledTransferOutCell_canceledScheduledTransferOutEvent on CanceledScheduledTransferOutEvent {
+  title
+  detail
+  postDate
+  amountRequested
+  createdAtTime
+  canceledAtTime
+  destinationAccount {
+    name
+    bank {
+      name
+      number
+    }
+    id
+  }
+}
+
+fragment barcodePaymentCell_barcodePaymentEvent on BarcodePaymentEvent {
+  title
+  postDate
+  barcodeInfo {
+    beneficiaryName
+  }
+  bpAmount: amount
+  bpAmountRequested: amountRequested
+  status
+}
+
+fragment billPaymentCell_billPaymentEvent on BillPaymentEvent {
+  title
+  postDate
+  amountRequested
+  amount
+  succeeded
+  failed
+}
+
+fragment lendingTransferOutCell_lendingTransferOutEvent on LendingTransferOutEvent {
+  title
+  description
+  detail
+  id
+  postDate
+  amount_: amount
+  status_: status
+  type
+  deepLink
+  source {
+    charges {
+      index
+    }
+  }
+}
+
+fragment lendingTransferInCell_lendingTransferInEvent on LendingTransferInEvent {
+  title
+  description
+  detail
+  id
+  postDate
+  deepLink
+  amount_: amount
+  status_: status
+  type
+}
+
+fragment lendingRenegotiationDownPaymentCell_lendingRenegotiationDownPaymentEvent on LendingRenegotiationDownPaymentEvent {
+  title
+  description
+  detail
+  id
+  postDate
+  deepLink
+  amount_: amount
+  status_: status
+}
+
+fragment barcodePaymentFailureCell_barcodePaymentFailureEvent on BarcodePaymentFailureEvent {
+  title
+  detail
+  postDate
+  barcodeInfo {
+    beneficiaryName
+  }
+  bpfAmount: amount
+}
+
+fragment barcodePaymentRequestFailedCell_barcodePaymentRequestFailedEvent on BarcodePaymentRequestFailedEvent {
+  title
+  barcodeInfo {
+    beneficiaryName
+  }
+  failedAt
+  postDate
+  amountRequested
+}
+
+fragment canceledScheduledBarcodePaymentRequestCell_canceledScheduledBarcodePaymentRequestEvent on CanceledScheduledBarcodePaymentRequestEvent {
+  title
+  detail
+  canceledAt
+  barcodeInfo {
+    beneficiaryName
+  }
+  postDate
+  amountRequested
+}
+
+fragment scheduledBarcodePaymentRequestCell_scheduledBarcodePaymentRequestEvent on ScheduledBarcodePaymentRequestEvent {
+  title
+  scheduledAt_: scheduledAt
+  postDate
+  barcodeInfo {
+    beneficiaryName
+  }
+  amountRequested
+}
+
+fragment scheduledBarcodePaymentRequestFailedCell_scheduledBarcodePaymentRequestFailedEvent on ScheduledBarcodePaymentRequestFailedEvent {
+  title
+  barcodeInfo {
+    beneficiaryName
+  }
+  detail
+  failedAt
+  postDate
+  amountRequested
+}
+
+fragment debitPurchaseCell_debitPurchaseEvent on DebitPurchaseEvent {
+  title
+  merchantName
+  postDate
+  optionalFooter: footer
+  purchaseAmount: amount
+  debitPurchaseEventId: purchaseId
+  virtualCard
+}
+
+fragment debitPurchaseReversalCell_debitPurchaseReversalEvent on DebitPurchaseReversalEvent {
+  title
+  merchantName
+  postDate
+  reversalAmount: amount
+  debitPurchaseReversalEventId: purchaseId
+}
+
+fragment debitWithdrawalCell_debitWithdrawalEvent on DebitWithdrawalEvent {
+  title
+  merchantName
+  postDate
+  purchaseAmount: amount
+}
+
+fragment debitWithdrawalReversalCell_debitWithdrawalReversalEvent on DebitWithdrawalReversalEvent {
+  title
+  merchantName
+  postDate
+  purchaseAmount: amount
+}
+
+fragment debitWithdrawalFeeCell_debitWithdrawalFeeEvent on DebitWithdrawalFeeEvent {
+  title
+  merchantName
+  postDate
+  purchaseAmount: amount
+}
+
+fragment debitWithdrawalFeeReversalCell_debitWithdrawalFeeReversalEvent on DebitWithdrawalFeeReversalEvent {
+  title
+  merchantName
+  postDate
+  feeAmount: amount
+}
+
+fragment addToReserveCell_addToReserveEvent on AddToReserveEvent {
+  title
+  postDate
+  completedAt
+  reservedAmount: amount
+  failureDateTime: failedAt
+  footer
+}
+
+fragment removeFromReserveCell_removeFromReserveEvent on RemoveFromReserveEvent {
+  title
+  postDate
+  completedAt
+  freeAmount: amount
+  failureDateTime: failedAt
+}
+
+fragment automaticSavingsReserveCell_automaticSavingsReserveEvent on AutomaticSavingsReserveEvent {
+  title
+  postDate
+  completedAt
+  reservedAmount: amount
+  failureDateTime: failedAt
+  footer
+}
+
+fragment moneysendPaymentCell_paymentEvent on MoneySendPaymentEvent {
+  id
+  receivedAmount: amount
+  detail
+  footer
+  postDate
+  senderName
+  softDescriptorOptional: softDescriptor
+  title
+}
+
+fragment moneysendFundingCell_fundingEvent on MoneySendFundingEvent {
+  id
+  sentAmount: amount
+  footer
+  postDate
+  receiverName
+  softDescriptorOptional: softDescriptor
+  title
+  failedBool: failed
+  succeededBool: succeeded
+}
+
+fragment moneysendFundingReversalCell_fundingReversalEvent on MoneySendFundingReversalEvent {
+  sentAmount: amount
+  footer
+  postDate
+  receiverNameOptional: receiverName
+  softDescriptorOptional: softDescriptor
+  title
+}
+
+fragment phoneRechargePendingCell_phoneRechargePendingEvent on PhoneRechargePendingEvent {
+  phoneRechargeRequestId: id
+  title
+  detail
+  postDate
+  nonNullAmount: amount
+}
+
+fragment phoneRechargeSuccessCell_phoneRechargeSuccessEvent on PhoneRechargeSuccessEvent {
+  phoneRechargeRequestId: id
+  title
+  detail
+  postDate
+  nonNullAmount: amount
+  nsu
+}
+
+fragment phoneRechargeFailureCell_phoneRechargeFailureEvent on PhoneRechargeFailureEvent {
+  phoneRechargeRequestId: id
+  title
+  detail
+  postDate
+  nonNullAmount: amount
+}
+
+fragment scheduledBillPaymentCell_scheduledBillPaymentEvent on ScheduledBillPaymentEvent {
+  title
+  postDate
+  detail
+  nonNullAmount: amount
+}
+
+fragment phoneRechargeMoneyReturnedCell_phoneRechargeMoneyReturnedEvent on PhoneRechargeMoneyReturnedEvent {
+  title
+  detail
+  postDate
+  nonNullAmount: amount
+}
+
+fragment chargingBoletoPaymentCell_chargingBoletoPaymentEvent on ChargingBoletoPaymentEvent {
+  id
+  title
+  detail
+  postDate
+  nonNullAmount: amount
+  nullableDescription: description
+}
+
+fragment chargebackCell_chargebackEvent on ChargebackEvent {
+  title
+  merchantName
+  postDate
+  adjustedAmount
+  chargebackEventId: id
+}
+
+fragment chargebackReversalCell_chargebackReversalEvent on ChargebackReversalEvent {
+  title
+  merchantName
+  postDate
+  adjustedAmount
+  chargebackReversalEventId: id
+}
+
+fragment chargebackFeeCell_chargebackFeeEvent on ChargebackFeeEvent {
+  title
+  merchantName
+  postDate
+  feeAmount: amount
+  chargebackFeeEventId: id
+}
+
+fragment chargebackFeeReversalCell_chargebackFeeReversalEvent on ChargebackFeeReversalEvent {
+  title
+  merchantName
+  postDate
+  feeAmount: amount
+  chargebackFeeReversalEventId: id
+}
+
+fragment lockMoneySuccessCell_lockMoneySuccessEvent on LockMoneySuccessEvent {
+  title
+  detail
+  postDate
+  successDateTime: completedAt
+  reservedAmount: amount
+  footer
+  id
+}
+
+fragment lockMoneyFailureCell_lockMoneyFailureEvent on LockMoneyFailureEvent {
+  title
+  detail
+  postDate
+  failedAt
+  reservedAmount: amount
+  footer
+}
+
+fragment lockMoneyPendingCell_lockMoneyPendingEvent on LockMoneyPendingEvent {
+  title
+  detail
+  postDate
+  reservedAmount: amount
+  footer
+}
+
+fragment rewardsCashbackCell_rewardsCashbackEvent on RewardsCashbackEvent {
+  title
+  detail
+  postDate
+  footer
+  cashbackAmount: amount
+}
+
+fragment genericCellV2_feedEvent on GenericFeedEvent {
+  __typename
+  id
+  postDate
+  title
+  detail
+  showClock
+  strikethrough
+  detailsDeeplink
+  cellFooter: footer
+}
