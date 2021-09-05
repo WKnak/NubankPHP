@@ -41,15 +41,18 @@ Os seguintes passos serão completados na primeira parte da autenticação manua
 1. aguardar o NuBank enviar um e-mail com um **código de validação** para o endereço vinculado à sua conta
 1. digitação o código recebido no console
 1. NuBank assina sua chave gerando um certificado de *consumidor* que será usado para próximos acessos
-(ver imagem na pasta docs)
+
+![autenticação parte 1](doc/autenticacao-parte1.png)
 
 #### Autenticação Manual - Parte 2
-Na seguinda parte da autenticação manual *novamente* será solicitado usuário/senha, com a finalidade de obter os tokens de acessos. Os seguintes passos serão completados:
+Na segunda parte da autenticação manual *novamente* será solicitado usuário/senha, com a finalidade de obter os tokens de acessos. Os seguintes passos serão completados:
 1. informar CPF/senha novamente.
 2. esta informação será assinada pelo seu certificado *consumidor*.
 3. NuBank vai enviar um **refresh-token** com validade inicial de 7 dias.
 4. O **refresh-token** será salvo para ser usado nas requisições automatizadas em conjunto com o certificado.
-(ver imagem na pasta docs)
+
+![autenticação parte 2](doc/autenticacao-parte2.png)
+
 #### Autenticação Automatizada
 Todos os exemplos disponibilizados (1 a 4 até o momento), vão realizar a autenticação utilizando o *certificado de consumidor* e o *refresh-token* para realizar uma nova autenticação, para então obter o **access-token** válido para a sessão.
 
