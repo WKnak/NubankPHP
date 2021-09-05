@@ -65,7 +65,7 @@ Os arquivos ```.gql``` são queries em GraphQL utilizadas para a realização da
 ## Referências
 No fórum do NuBank existem várias referências a projetos já iniciados para atender a esta demanda. O desenvolvimento desta biblioteca NubankPHP foi possível através destes projetos. 
 
-Existe uma manifestação no Twitter da conta oficial do Nubank de que "todos os nossos apps funcionam através de API públicas mas não temos documentações ou ferramentas p/ integrações c/ outros serviços :/" - https://twitter.com/nubank/status/766665014161932288
+Existe uma manifestação no Twitter da conta oficial do Nubank sobre o acesso à API: "todos os nossos apps funcionam através de *API públicas* mas não temos documentações ou ferramentas p/ integrações c/ outros serviços :/" - https://twitter.com/nubank/status/766665014161932288
 
 * Projeto Nubank-API (Javascript) - https://github.com/Astrocoders/nubank-api (descontinuado)
 * Projeto pynubank (Python) - https://github.com/andreroggeri/pynubank
