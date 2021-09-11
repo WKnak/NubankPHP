@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * NubankPHP
  *
  * Copyright 2021 William Knak
@@ -26,6 +25,9 @@ $pixKeys = $nubank->getPixKeys();
 ?>
 
 <html>
+    <style>
+        th { text-align: left }
+    </style>
     <body>
         <h1>NubankPHP</h1>
 
@@ -48,6 +50,8 @@ $pixKeys = $nubank->getPixKeys();
             <?php } ?>
         </table>
         <p>Account ID: <?= $pixKeys['account_id'] ?></p>
+
+        <a href="example5.php">Criar uma solicitação de pagamento Pix</a>
 
     </body>
 </html>

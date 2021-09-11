@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * NubankPHP
  *
  * Copyright 2021 William Knak
@@ -259,7 +259,7 @@ class NubankPHP {
 
             if ($f->__typename == "ReceiptHeaderPiece") {
                 $r["_title"] = trim($f->headerTitle);
-                
+
                 $r["data_str"] = trim($f->headerSubtitle);
                 $r["data"] = $this->_parseDate(trim($f->headerSubtitle));
                 $r["data_ptBR"] = date("d/m/Y H:i:s", $r["data"]);
@@ -272,8 +272,6 @@ class NubankPHP {
                 $r["transf_id_transacao"] = $this->_parseIdTransacao(trim($f->footerTitle));
             }
         }
-
-        ksort($r);
 
         return $r;
     }
@@ -332,7 +330,12 @@ class NubankPHP {
             //echo "<pre>$result</pre>"; die();
 
             if (isset($data->data->viewer->savingsAccount->getGenericReceiptScreen)) {
-                return $this->_parseTransferDetail($transactionType, $data->data->viewer->savingsAccount->getGenericReceiptScreen);
+                $r = $this->_parseTransferDetail($transactionType, $data->data->viewer->savingsAccount->getGenericReceiptScreen);
+                $r['_id'] = $transactionId;
+
+                ksort($r);
+
+                return $r;
             }
         }
         return ["_type" => $transactionType];
@@ -379,6 +382,37 @@ class NubankPHP {
             //if ($data) {
             //    return $data;
             //}
+        }
+        return FALSE;
+    }
+
+    public function createPixMoneyRequest($savingsAccountId, $valor, $chavePix, $codigoPedido = false, $message = false) {
+
+        $payload = array("createPaymentRequestInput" =>
+            array(
+                "amount" => $valor,
+                "pixAlias" => $chavePix,
+                "savingsAccountId" => $savingsAccountId
+        ));
+
+        if ($codigoPedido) {
+            $payload["createPaymentRequestInput"]["transactionId"] = $codigoPedido;
+        }
+        if ($message) {
+            $payload["createPaymentRequestInput"]["message"] = $message;
+        }
+
+        $params = $this->prepareQueryRequestBody("create_pix_money_request", $payload);
+
+        $result = Curl::postUsingCertAndToken($this->queryURL, $params, $this->certPath, $this->sessionAccessToken);
+
+        if ($result) {
+
+            $data = json_decode($result);
+
+            $paymentRequest = $data->data->createPaymentRequest->paymentRequest;
+
+            return $paymentRequest;
         }
         return FALSE;
     }
