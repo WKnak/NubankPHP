@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * NubankPHP
  *
  * Copyright 2021 William Knak
@@ -26,7 +25,7 @@ if (!$loginSuccess) {
 <html>
     <body>
         <h1>NubankPHP</h1>
-        <p>Refresh Token expira em: <?= date("d/m/Y H:i:s", $nubank->getRefreshTokenExpiration()) ?></p>
-        <small>Obs: com o refresh Token, você obtém um Access Token. O refresh token é renovado por +7 dias a cada acesso (server side)</small>
+        <p>Access Token expira em: <?= date("d/m/Y H:i:s", $nubank->getRefreshTokenExpiration()) ?></p>
+        <small>Obs: com o <b>Refresh Token</b>, você obtém um <b>Access Token</b>.<br />O access token tem validade de 7 dias. A API renova o access-token quando este tiver validade menor que 6 dias.</small>
     </body>
 </html>

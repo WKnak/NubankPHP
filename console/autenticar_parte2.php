@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * NubankPHP
  *
  * Copyright 2021 William Knak
@@ -53,21 +53,18 @@ $accessToken = $result->access_token;
 $refreshToken = $result->refresh_token;
 $refreshBefore = date("d/m/Y H:i", strtotime($result->refresh_before));
 
-file_put_contents(ACCESS_TOKEN_FILE, $accessToken);
 file_put_contents(REFRESH_TOKEN_FILE, $refreshToken);
 
-$arquivosExistem = file_exists(ACCESS_TOKEN_FILE);
-$arquivosExistem &= file_exists(REFRESH_TOKEN_FILE);
+$arquivoExiste = file_exists(REFRESH_TOKEN_FILE);
 
-if ($arquivosExistem) {
+if ($arquivoExiste) {
     echo <<<EOF
   ---------------------------------------------------------
   [ Sucesso! ]
-  Um token foi gerado com sucesso e foi salvo no arquivo.
-  
-  O Refresh token é válido até $refreshBefore
-  O prazo de acesso se renova automaticamente após cada 
-  uso (server side).
+  Um Refresh-Token foi obtido e salvo com sucesso no disco.
+    
+  Com o Refresh-Token será possível obter um Access-Token
+  que é válido por 7 dias.
             
   Agora você já pode realizar acesso sem precisar informar
   cpf/senha em cada acesso, útil para scripts automatizados

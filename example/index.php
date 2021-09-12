@@ -20,6 +20,7 @@
             <li><a href="example2.php">Exemplo 2</a>: Validade do Refresh Token (geralmente 7 dias)</li>
             <li><a href="example3.php">Exemplo 3</a>: 10 lançamentos mais recentes</li>
             <li><a href="example4.php">Exemplo 4</a>: Suas chaves PIX com o Nubank</li>
+            <li><a href="example5.php">Exemplo 5</a>: Criação de requisição de pagamento PIX</li>
         </ul>
 
         <p><b>Importante:</b> Realizar muitas consultas seguidas pode resultar em bloqueio temporário, mostrando a informação "Can't Login". Caso

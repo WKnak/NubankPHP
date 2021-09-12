@@ -83,6 +83,52 @@ class NubankPHP {
     }
 
     /**
+     * Um access-token é obtido a partir do refresh-token
+     * 
+     * O Access-token tem validade de 7 dias
+     */
+    private function carregarInfoSessao() {
+
+        $ACCESS_TOKEN_INVALIDO = false;
+        if (!file_exists(ACCESS_TOKEN_FILE)) {
+            return false;
+        }
+
+        $sessionInfo = json_decode(file_get_contents(ACCESS_TOKEN_FILE));
+
+        if (!$sessionInfo) {
+            return $ACCESS_TOKEN_INVALIDO;
+        }
+
+        $validadeAccessToken = $sessionInfo->refresh_before;
+
+        $hoje = time();
+        $diasRestantes = ($validadeAccessToken - $hoje) / 86400;
+
+        // renovar o AccessToken se já passou 1 dos 7 dias
+
+        if ($diasRestantes < 6.0) {
+            return $ACCESS_TOKEN_INVALIDO;
+        }
+
+        return $sessionInfo;
+    }
+
+    /**
+     * Salvar os dados de AccessToken, validade e URL de Query
+     */
+    private function salvarInfoSessao($json) {
+
+        $sessionInfo = array(
+            "access_token" => $json->access_token,
+            "url_query" => $json->_links->ghostflame->href,
+            "refresh_before" => strtotime($json->refresh_before)
+        );
+
+        file_put_contents(ACCESS_TOKEN_FILE, json_encode($sessionInfo));
+    }
+
+    /**
      * Autenticar somente com refresh token + certificado.
      * 
      * Se o refresh token ainda for válido, ele será renovado
@@ -98,35 +144,46 @@ class NubankPHP {
             throw new \Exception("refreshToken não foi passado no construtor");
         }
 
-        $payload = [
-            'grant_type' => 'refresh_token',
-            'client_id' => 'legacy_client_id',
-            'client_secret' => 'legacy_client_secret',
-            'refresh_token' => $this->refreshToken
-        ];
+        $sessionInfo = $this->carregarInfoSessao();
 
-        $result = Curl::postUsingCert(self::URL_TOKEN, $payload, $this->certPath, $this->refreshToken);
+        if ($sessionInfo) {
+            // existe uma informação válida de sessão
+            $this->sessionAccessToken = $sessionInfo->access_token;
+            $this->queryURL = $sessionInfo->url_query;
+            $this->refreshTokenExpiration = $sessionInfo->refresh_before;
 
-        if ($result) {
-            $json = json_decode($result);
 
-            if ($json) {
-                if (isset($json->refresh_before)) {
-                    $this->refreshTokenExpiration = strtotime($json->refresh_before);
+            return TRUE;
+        } else {
+            // necessita autenticar com refresh_token
+            $payload = [
+                'grant_type' => 'refresh_token',
+                'client_id' => 'legacy_client_id',
+                'client_secret' => 'legacy_client_secret',
+                'refresh_token' => $this->refreshToken
+            ];
+
+            $result = Curl::postUsingCert(self::URL_TOKEN, $payload, $this->certPath, $this->refreshToken);
+
+            if ($result) {
+                $json = json_decode($result);
+
+                if ($json) {
+
+                    if (isset($json->access_token)) {
+                        $this->sessionAccessToken = $json->access_token;
+                        $this->queryURL = $json->_links->ghostflame->href;
+                        $this->refreshTokenExpiration = strtotime($json->refresh_before);
+                        $this->salvarInfoSessao($json);
+
+                        return TRUE;
+                    }
+                } else {
+                    throw new \Exception("Falhou: $result");
                 }
-                if (isset($json->access_token)) {
-                    $this->sessionAccessToken = $json->access_token;
-
-                    //var_dump( $json->_links); die();
-
-                    $this->queryURL = $json->_links->ghostflame->href;
-
-                    return TRUE;
-                }
-            } else {
-                throw new \Exception("Falhou: $result");
             }
         }
+
         return FALSE;
     }
 

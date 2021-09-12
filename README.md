@@ -11,10 +11,11 @@ Biblioteca não oficial para acesso a dados de sua conta NuBank.
 
 Projeto inicial em desenvolvimento.
 
-## TODO
-- [ ] Colocar access-token em cache por algumas horas (minimizar reautenticação). Atualmente um access-token
-é obtido para cada refresh de página, talvez não seja necessário.
-- [ ] Criação de solicitação de pagamento PIX
+## v1.1
+- [X] É gerado um access-token com validade de 7 dias. Ele é reutilizado (cache) durante 24 horas. Quando a validade do access-token for menor que 6 dias, um novo access-token é gerado.
+- [X] Criação de solicitação de pagamento PIX (example5.php)
+
+## TO-DO
 - [ ] Acompanhamento de pagamento de solicitação
 - [ ] Cache dos detalhes das transações (para evitar consultas repetidas)
 
