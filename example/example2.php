@@ -26,6 +26,11 @@ if (!$loginSuccess) {
     <body>
         <h1>NubankPHP</h1>
         <p>Access Token expira em: <?= date("d/m/Y H:i:s", $nubank->getRefreshTokenExpiration()) ?></p>
-        <small>Obs: com o <b>Refresh Token</b>, você obtém um <b>Access Token</b>.<br />O access token tem validade de 7 dias. A API renova o access-token quando este tiver validade menor que 6 dias.</small>
+        <p>Access Token:<br />
+            <textarea style="width: 40em; height: 16em;" ><?= $nubank->getAccessToken() ?></textarea>
+        </p>
+
+        <p><small>O <b>Access Token</b> é obtido através do <b>Refresh Token</b>.<br />O access token tem validade de 7 dias. A API renova o access-token quando este tiver validade menor que 6 dias.</small></p>
+        <p><small>Você pode utilizar o <b>Access Token</b> com o software Insonmia para realizar testes de requisição ao GraphQL (API Pública) do Nubank.</small></p>
     </body>
 </html>

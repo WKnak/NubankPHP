@@ -47,6 +47,10 @@ class NubankPHP {
         return $this->authenticator->requestEmailCode();
     }
 
+    public function getAccessToken() {
+        return $this->sessionAccessToken;
+    }
+    
     /**
      * Realiza a confirmação do código recebido por e-mail, e em caso de 
      * sucesso, conclui a troca de certificados, salvando o certificado 
