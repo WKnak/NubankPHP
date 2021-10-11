@@ -16,7 +16,7 @@ function AutoLoader($className) {
 
     $file = str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    $file = __DIR__ . "\\" . $file;
+    $file = __DIR__ . DIRECTORY_SEPARATOR . $file;
 
     require_once $file;
 }
