@@ -13,7 +13,7 @@
 //
 // EXEMPLO:
 //
-//    php autenticar_parte2.php -a    
+//    php test.php -a    
 //
 
 include ('../src/autoload.php');
