@@ -22,6 +22,8 @@ define("REFRESH_TOKEN_FILE", AUTH_BASE . 'NubankPHP-client.refresh_token');
 /**
  * Ajustar o caminho para seu openssl.cnf conforme ambiente (Linux/Windows)
  */
+
+// define("OPENSSL_CNF_LOCATION", "/usr/lib/ssl/openssl.cnf");
 define("OPENSSL_CNF_LOCATION", __DIR__ . "\\..\\..\\openssl-1.1.1k\\openssl.cnf");
 
 if (!is_dir(AUTH_BASE)) {
