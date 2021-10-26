@@ -26,6 +26,7 @@ if (!$loginSuccess) {
 
 $dashboardFeed = $nubank->getAccountFeed();
 $max = isset($_GET['max']) ? $_GET['max'] : 10;
+$transferInOnly = isset($_GET['TransferIn']);
 $cnt = 0;
 ?>
 
@@ -33,7 +34,12 @@ $cnt = 0;
     <body>
         <h1>NubankPHP</h1>
 
-        <h2>Últimas <?= $max ?> registros do Feed da Conta <small>[<a href="example3.php?max=20">20</a>] [<a href="example3.php?max=50">50</a>]</small></h2>
+        <h2>Últimas <?= $max ?> registros do Feed da Conta 
+            <small>
+                [<a href="example3.php?max=20">20</a>] 
+                [<a href="example3.php?max=50">50</a>]
+                [<a href="example3.php?TransferIn=true">Transfer In</a>]
+            </small></h2>
         <table cellpadding="4" cellspacing="0" border="1">
             <tr>
                 <th>ID</th>
@@ -46,6 +52,8 @@ $cnt = 0;
             </tr>
             <?php
             foreach ($dashboardFeed as $f) {
+                
+                if($transferInOnly && $f->__typename != "TransferInEvent") continue;
 
                 $linkDetails = false;
                 if ($f->pix) {
