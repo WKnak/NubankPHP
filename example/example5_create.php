@@ -23,8 +23,8 @@ if (!$amount | $amount <= 0.0) {
 $tx_id = $_POST['tx_id'];
 
 if ($tx_id) {
-    if (strlen($tx_id) > 12) {
-        header("location: example5.php?msg=tx_id inválido, max 12 chars.");
+    if (strlen($tx_id) > 35) {
+        header("location: example5.php?msg=tx_id inválido, max 35 chars.");
         die();
     }
     $tx_id_verified = preg_replace("/[^a-zA-Z0-9]/", "", $tx_id);

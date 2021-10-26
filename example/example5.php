@@ -52,8 +52,8 @@ $pixKeys = $nubank->getPixKeys();
                     <td><small style="color: #444">Caracteres livres (inclusive Emoji ❤). Consulte manual PIX sobre tamanho.</small></td>
                 </tr>
                 <tr>
-                    <th>ID Transação:</th><td><input name="tx_id" type="text" maxlength="12" placeholder="TX0000000001" /></td>
-                    <td><small style="color: #444">Máx 12 caracteres, a~z A~Z 0~9</small></td>
+                    <th>ID Transação:</th><td><input name="tx_id" type="text" maxlength="35" placeholder="TX0000000001" /></td>
+                    <td><small style="color: #444">Máx 35 caracteres, a~z A~Z 0~9</small></td>
                 </tr>
                 <tr><td></td><td><button type="submit">Criar solicitação</button></td></tr>
 
